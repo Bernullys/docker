@@ -115,3 +115,8 @@ Host ports:         Port 5000   Port 3000   Port 3001
 
 Container ports:    Port 5000   Port 3000   Port 3000
 
+
+Debugging Containers:
+    docker logs
+    docker exec -it
+
