@@ -13,4 +13,7 @@ docker exec -it container_id /bin/bash  this is to go inside the container and f
 
 Recap: docker run is to create a new container and docker start is to restard an existing container.
 
-
+docker container prune      Remove all stoped containers.
+docker rmi image_name_or_image_id      Remove an image.
+docker image prune          
+docker image prune --all    Delete all images
