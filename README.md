@@ -7,7 +7,7 @@ Docker course overview:
     Docker Installation.
     Main commands.
     Debugging a container.
-    Developing with contaainers.
+    Developing with containers.
     Docker compose - Running multiple services.
     Dockerfile - Building own Docker image.
     Private Docker Repository (AWS).
@@ -119,4 +119,117 @@ Container ports:    Port 5000   Port 3000   Port 3000
 Debugging Containers:
     docker logs
     docker exec -it
+
+---------------------------------------------------------------------
+Notes from Docker training Course for the Absolute Beginner.
+
+
+Sharing the kernel: As long as all softwares shares the same OS
+
+    Software1   Software2   Software3   Software4
+    ------------Docker---------------------------
+    ----------------------OS---------------------
+
+Example: windows can't run on Linux OS. When we have windows and run a Linux base container, actually windows is runing a VM with Linux OS so can have a Linux container on top.
+
+The main object of Docker is to package a containerized applications and to ship them and to run them anywhere, any time and any times as you want.
+
+
+Containrs vs Virtual Machines:
+
+VM:                                         Container:
+    App                                             App
+    Libs/Deps                                       Libs/Deps
+    OS                                              ---------
+    --------                                        Docker    
+    Hypervisor                                      ---------
+    --------                                        OS
+    Hardware Infrastructure                         ---------        
+                                                    Hardware Infrastructure
+
+MB                                                  MB
+Slow Boot up                                        Faster Boot up                                       
+
+On big projects Containers works with VM.
+On these cases multiple Containers run on a VM.
+
+
+Container vs image:
+
+    Docker Image:               Docker Containers:
+    Package                     Instanses of Docker Images running.    
+    Template
+    Plan
+
+Developers provide Operators with the App and a DockerFile (This is an Image).
+
+
+Docker Editions:
+
+    Community Edition           Enterprise Edition
+    Free Images                 Support, Security, etc... (Pay)
+
+
+Important:
+    When we run an image of an operationg system (like ubuntu image), this will create the container but will automatically stoped because docker it's not designe to run OS. 
+    The container will be up only if the app's inside keep active. If those end or crash the container will exit.
+
+    When we pull or run and image from dockerHub: if is official will have only a name, but if is from a user repository will be like user_name/image_name.
+
+-------------------------------------------------
+Module Docker Run:
+
+Run -tag:
+
+docker run image_name:image_version     (This is called a tag)
+When we don't specificed a tag, will named as latest.
+
+Run - STDIN
+
+Docker runs in a none interactive mode. So if your dockerized app pront for an input, when you run it won't pront normally. So to make it work you must map the container input using -i parameter (for interactive mode).
+Example:
+docker run -i interactive_image_name
+But in this example still we miss the promp.
+So if the app promps a message we need the t parameter too. Like:
+docker run -it interactive_image_name
+
+Run - PORT mapping (port publishing on containers)
+
+The underline host where docker is installed is called dockerHost or docker engine.
+How a user can access my application?
+One option is to use the IP asigned to the docker container. But this is an internal IP and would be only accessible withing the docker host.
+To get access from outside we could use the IP of the Docker Host but for that to work you have to map the port inside the docker container to a free port on the Docker Host. (Remember the image of the video)
+Example:
+docker run -p 80:5000 image_name_1
+docker run -p 8000:5000 image_name_1
+docker run -p 8001:5000 image_name_1
+docker run -p 3306:3306 image_name_2
+docker run -p 8306:3306 image_name_2
+docker run -p 3306:3306 image_name_2    This is an error is going to a Docker Host port that is allready used.
+
+Run - Volume mapping (persisting data on a docker container)
+
+When we stop and remove a container, the data will be deleted.
+To keep the data we can do this (example):
+docker run -v /opt/datadir:/var/lib/image_name image_name
+This way we create a file in the Docker Host but outside the Docker container.
+
+Inspect Container (More details about a container)
+
+docker inspect container_name_or_id
+This command will return a json with all data.
+
+
+Container Logs
+
+docker logs container_name_or_id
+Will show the logs of the container.
+
+
+
+
+
+
+
+
 
