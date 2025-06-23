@@ -17,6 +17,8 @@ Recap: docker run is to create a new container and docker start is to restard an
 
 Note: We have to stop containers before deleting them.
 
+Note: to modify a text file on the terminal I can use: nano file_name
+
 docker rm container_name or id
 docker container prune      Remove all stoped containers.
 docker rmi image_name_or_image_id      Remove an image.
@@ -32,3 +34,6 @@ docker ps --filter ancestor=image_name --format '{{.ID}}'   To identify a contai
 docker exec -it <container id> bash     To interact with the terminal.
 echo "This is the file" >> /root/learning.txt   Creates a file and add some text.
 
+docker history image_name   will show the size of each layer of Instructions of the DockerFile.
+
+docker run image_name cat /etc/*release*    Show details of release.

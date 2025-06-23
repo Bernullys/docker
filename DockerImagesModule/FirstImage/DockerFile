@@ -1,0 +1,19 @@
+# INSTRUCTION argument
+FROM Ubuntu 
+
+RUN apt-get update
+RUN apt-get install python
+
+RUN pip install flask
+RUN pip install flask-mysql
+
+COPY . /opt/souce-code
+
+ENTRYPOINT FLASK_APP=/opt/source-code /aap.py flask run
+
+# 5 Layers:
+# 1. Base image (Ubuntu)
+# 2. Changes in apt packages
+# 3. Changes i pip packages
+# 4. Source code
+# 5. Update Entrypoint with "flask" command

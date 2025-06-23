@@ -226,10 +226,38 @@ docker logs container_name_or_id
 Will show the logs of the container.
 
 
+---------------------------------------------------------------------
+Module Docker Images (How to create own images).
 
+Why we would create our own image ?
+Because the image does not exits on DockerHub.
+Or beacause we decided that the app we are developing will be containerize for easier deployment.
 
+How to create my own emage?
+First we need to understand: what we are continerizing or what application we are creating an image for and how the application is built.
 
+Steps to deploy an application manually: (A Flask application as example)
+A set of instructions:
+    1. OS - Ubuntu.
+    2. Update apt repo.
+    3. Install dependencies using apt.
+    4. Install Python dependencies using pip.
+    5. Copy source code to /opt folder.
+    6. Run the web server using "flask" command.
+Now we create a docker file using the instructions:
+    Create a docker file named Dockerfile.
+    Write the file.
+    Then run the docker file with: docker build Dockerfile -t docker_user/app_image_tagname.
+    To make it available on DockerHub: docker push docker_user/app_image_tagname.
+How to create the docker file:
+    Is a text file written in a specific format that docker understand.
+    Is: INSTRUCTION argument (See the DockerFile on ./DockerImagesModule/FirstImage/DockerFile).
 
+Layered architectureins:
+    When docker creates an image it does it by layers. Each line of instruction creates a layer.
 
+What can you containerize ?
+Almost all kind of applications.
 
+If I inside the directory wich has the Dockerfile, and I want to build the image: docker build -t image_name . (. is necessary which indicates the current directory).
 
