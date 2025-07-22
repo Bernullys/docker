@@ -58,7 +58,7 @@ Docker course overview:
             alpine:3.10         Layer - linux base image
 
         Separate images are downloaded when bringing from DockerHub.
-        Is an advantage because if we nedd to update a version, only different layers are downloaded.
+        Is an advantage because if we need to update a version, only different layers are downloaded.
 
     How to differentiate an image from a container:
     
@@ -171,7 +171,7 @@ Docker Editions:
 
 
 Important:
-    When we run an image of an operationg system (like ubuntu image), this will create the container but will automatically stoped because docker it's not designe to run OS. 
+    When we run an image of an operationg system (like ubuntu image), this will create the container but will automatically stoped because docker it's not design to run OS. 
     The container will be up only if the app's inside keep active. If those end or crash the container will exit.
 
     When we pull or run and image from dockerHub: if is official will have only a name, but if is from a user repository will be like user_name/image_name.
@@ -233,7 +233,7 @@ Why we would create our own image ?
 Because the image does not exits on DockerHub.
 Or beacause we decided that the app we are developing will be containerize for easier deployment.
 
-How to create my own emage?
+How to create my own image?
 First we need to understand: what we are continerizing or what application we are creating an image for and how the application is built.
 
 Steps to deploy an application manually: (A Flask application as example)
@@ -259,5 +259,5 @@ Layered architectureins:
 What can you containerize ?
 Almost all kind of applications.
 
-If I inside the directory wich has the Dockerfile, and I want to build the image: docker build -t image_name . (. is necessary which indicates the current directory).
+If I'm inside the directory wich has the Dockerfile, and I want to build the image: docker build -t image_name . (. is necessary which indicates the current directory).
 
