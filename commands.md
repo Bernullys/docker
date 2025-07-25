@@ -38,3 +38,5 @@ echo "This is the file" >> /root/learning.txt   Creates a file and add some text
 docker history image_name   will show the size of each layer of Instructions of the DockerFile.
 
 docker run image_name cat /etc/*release*    Show details of release.
+
+docker push docker_hub_user_name/image_tag  To push an image to DockerHub, this means the image has t be tag with that format: user name and image tag.
