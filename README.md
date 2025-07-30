@@ -261,3 +261,46 @@ Almost all kind of applications.
 
 If I'm inside the directory wich has the Dockerfile, and I want to build the image: docker build -t image_name . (. is necessary which indicates the current directory).
 
+
+-------------------------------------------------------------------------------------
+Enviroment Variables
+
+We can set variables inside our app to be manupulated withing the command to run a container.
+Example: docker run -e VARIABLE=variable_value -d -p 8080:8280 --name name_i_want image_name
+
+We can check which variables are set to manipulate on a running container with:
+docker inspect container_name
+Go to "Config":{... Env: ["VARIABLE", "VARIABLE2,...]}
+
+
+-------------------------------------------------------------------------------------
+CMD vs ENTRYPOINT
+
+Commands, arguments and entrypoints.
+
+Some Dockerfile has:
+    CMD ["command to run"]
+For mysql container:
+    CMD ["mysqld"]
+Ubuntu uses:
+    CMD ["bash"]
+
+We can override the command on the command line to run the container.
+We can write the command we want inside the Dockerfile like:
+    CMD ["command", "param1"]   this is a json array format.
+
+We can also pass only the parameter on the command line to run the container.
+There is where EMTRYPOINT comes to play like:
+    ENTRYPOINT ["command"]
+    and the parameter can be set on the command line to run the container.
+    But the parameter has to specified too.
+    So we need to use CMD too. In the Dockerfile:
+    CMD["param1"] and that param will be the default one.
+
+Finally if we want to override all the entripoint and the cmd:
+    docker run --entrypoint new_entrypoint image_name paramX
+
+
+
+
+

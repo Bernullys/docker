@@ -10,7 +10,7 @@ docker run image_name   pulls image and starts container right away
 docker run -d image_name    Run detached mode
 docker attach container_id      To go to attach mode of a running container.
 docker run -p 6000:6379  image_name    To bind to a specific port. 6000 is the host and 6379 is the container.
-docker run -d -p500:3000 --name the_name_I_want image_name  to create a container with a name we want.
+docker run -d -p 500:3000 --name the_name_I_want image_name  to create a container with a name we want.
 docker exec -it container_id /bin/bash  this is to go inside the running container and from there we can manipulate. To exit just type exit.
 docker run -it os_image_name bash       This will send me to the bash terminal of that os image.
 
@@ -37,6 +37,6 @@ echo "This is the file" >> /root/learning.txt   Creates a file and add some text
 
 docker history image_name   will show the size of each layer of Instructions of the DockerFile.
 
-docker run image_name cat /etc/*release*    Show details of release.
+docker run image_name cat /etc/*release*    Show details of release and OS.
 
 docker push docker_hub_user_name/image_tag  To push an image to DockerHub, this means the image has t be tag with that format: user name and image tag.
