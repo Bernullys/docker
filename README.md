@@ -262,7 +262,7 @@ Almost all kind of applications.
 If I'm inside the directory wich has the Dockerfile, and I want to build the image: docker build -t image_name . (. is necessary which indicates the current directory).
 
 
--------------------------------------------------------------------------------------
+---------------------
 Enviroment Variables
 
 We can set variables inside our app to be manupulated withing the command to run a container.
@@ -273,7 +273,7 @@ docker inspect container_name
 Go to "Config":{... Env: ["VARIABLE", "VARIABLE2,...]}
 
 
--------------------------------------------------------------------------------------
+-------------------
 CMD vs ENTRYPOINT
 
 Commands, arguments and entrypoints.
@@ -299,6 +299,35 @@ There is where EMTRYPOINT comes to play like:
 
 Finally if we want to override all the entripoint and the cmd:
     docker run --entrypoint new_entrypoint image_name paramX
+
+
+--------------------------------------------------------------------------------------------------
+Module: Docker Compose.
+
+Docker compose is to run not that simple applications.
+Insted of a Dockerfile we need to do configurations in yml files: docker-compose.yml.
+Command to run the compose: docker-compose up
+
+There will be several containers and will be compose to work together.
+This is only applicable on containers that are running on a single docker host.
+
+Sample application - Voting application:
+    First we need to run all the already made images, and we need to named every container to use its name later on.
+    If the container will be running a server in a port, that will be the port of the container, and we need to set the port for the host, so we can access from a browser.
+    Second we already have all the containers running but we need to link the ones that has to be link. And to do that we use the --link name_container_to_link:name_host_the_container_is_looking  This is why we named the containers.
+    Third we can start the compose file. The names of the containers are the keys, and the values is the name of the image to use. Alse the other commands will be pass as values.
+    There is an option to insted of passing the image value, pass the build: path_of_file_to_create_an_image.
+
+    Docker compose - versions. There are different versions and we can see any of them.
+    From version 2 onwards the version is type on top of the docker-compose.yml.
+    And from version 2 the link command is not need anymore.
+    Version 3 will be explain later. It supports Docker Swarm.
+
+    Networks:
+    Now Docker compose separate frontend (Network 1) and backend (Network 2). And we need to add between the values, if is only frontend, only backend or both.
+
+
+
 
 
 
