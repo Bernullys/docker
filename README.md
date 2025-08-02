@@ -315,16 +315,52 @@ Sample application - Voting application:
     First we need to run all the already made images, and we need to named every container to use its name later on.
     If the container will be running a server in a port, that will be the port of the container, and we need to set the port for the host, so we can access from a browser.
     Second we already have all the containers running but we need to link the ones that has to be link. And to do that we use the --link name_container_to_link:name_host_the_container_is_looking  This is why we named the containers.
-    Third we can start the compose file. The names of the containers are the keys, and the values is the name of the image to use. Alse the other commands will be pass as values.
+    Third we can start the compose file. The names of the containers are the keys, and the value is the name of the image to use. Also the other commands will be pass as values.
     There is an option to insted of passing the image value, pass the build: path_of_file_to_create_an_image.
 
     Docker compose - versions. There are different versions and we can see any of them.
     From version 2 onwards the version is type on top of the docker-compose.yml.
-    And from version 2 the link command is not need anymore.
+    And from version 2 the link command is not needed anymore.
     Version 3 will be explain later. It supports Docker Swarm.
 
     Networks:
     Now Docker compose separate frontend (Network 1) and backend (Network 2). And we need to add between the values, if is only frontend, only backend or both.
+
+Demo - Example Voting Application.
+
+    Clone the repository from github:
+        git clone git@github.com:dockersamples/example-voting-app.git
+    Create an image from vote folder. Is name is voting-app:
+        docker build -t voting-app .
+    Create a container from voting-app image, and I named it voting-app-container, and is deploy on port 5000:
+        docker run -d -p 5000:80 --name voting-app-container voting-app
+    Create a container from redis. I hadn't that image so it was bring from dockerHub. But is working, and also is name is redis:
+        docker run -d --name redis redis
+    I stop the voting-app-container:
+        docker stop container_id
+    Create an instance of voting app but now link to redis:
+        docker run -d -p 5000:80 --link redis:redis voting-app
+    Create an image from db. We have to check which version of postgres image was used in the compose file in the repository. Is postgres:15-alpine
+    Create an instance of the image named db:
+        docker run -d --name db postgres:15-alpine  But is not running that container, got stop right away.
+        I ask chat-gpt and give me this command: (I change the name to dbs)
+            docker run -d --name dbs \
+            -e POSTGRES_USER=admin \
+            -e POSTGRES_PASSWORD=secret \
+            -e POSTGRES_DB=test_db \
+            -p 5432:5432 \
+            postgres:15-alpine
+    Create an image from worker folder named worker-app:
+        docker build -t worker-app .
+    Run an instance of the worker-app image but it needs two links, one to the postgres database and another to the redis:
+        docker run -d --link redis:redis --link dbs:dbs worker-app
+    Next step is build and deploy the resulting app:
+    Create an image from the result app:
+        docker build -t result-app .
+    The result-app is a webserver so it has a port, so we have to set it to an empty port and also we need to link it to the dbs:
+        docker run -d -p 5001:80 --link dbs:dbs result-app
+    The apo not work for me as spected... But all the images and containers ran as spected.
+
 
 
 
